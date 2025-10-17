@@ -18,22 +18,33 @@ print(rand_num)
 
 print("-" * 40)
 
-incorrect_num = []
+tries = 0
 while True:
-    choice = int(input("Enter a number: "))
+    choice = input("Enter a number: ")
+    print("-" * 40)
+    
+
+    try:
+        choice = int(choice)
+    except ValueError:
+        print("Invalid input. Please add numbers only.")
+        print("-" * 40)
+        continue
+    tries += 1
 
     if choice == rand_num:
-        print(f"Correct, you've guessed the right number in {sum(incorrect_num)} guesses!")
+        print(f"Correct, you've guessed the right number in {tries} guesses!")
+        print("-" * 40)
+        print("That's amazing!")
         break
-    elif not 1000 <= choice <= 9999:
-        incorrect_num.append(choice)
+    elif 1000 < choice > 9999:
+        incorrect_num += 1
         print("You have not chosen a 4 digit number.")
-        print("Try again.")
-    elif 1000 <= choice <= 9999:
-        choice != rand_num
-        incorrect_num.append(choice)
+        print("-" * 40)
+    else:
+        incorrect_num += 1
         print("You have not guessed the number!")
-        print("Try again.")
+        print("-" * 40)
     print(incorrect_num)
 
 
