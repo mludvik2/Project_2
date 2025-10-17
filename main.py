@@ -37,15 +37,13 @@ while True:
         print("-" * 40)
         print("That's amazing!")
         break
-    elif 1000 < choice > 9999:
-        incorrect_num += 1
+    elif choice < 1000 or choice > 9999:
         print("You have not chosen a 4 digit number.")
         print("-" * 40)
     else:
-        incorrect_num += 1
         print("You have not guessed the number!")
         print("-" * 40)
-    print(incorrect_num)
+    print(tries)
 
 
 
