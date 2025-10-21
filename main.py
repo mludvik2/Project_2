@@ -11,12 +11,12 @@ def generate_secret_num() -> str:
       numbers and no zero at the beginning
       """
     while True:
-        num = random.sample('013456789',4)
-        if num [0] != '0':
+        num = random.sample('0123456789',4)
+        if num[0] != '0':
             number = ''.join(num)
             return number
         
-def if_valid_guess(guess):
+def is_valid_guess(guess):
     """Check if the input guess is valid:
     -must be 4 digits long
     -must contain only numbers
@@ -43,15 +43,22 @@ def if_valid_guess(guess):
 def count_bulls_and_cows(secret, guess):
     """Counting Bulls and Cows.
     Bulls: correct digit and correct position
-    Cows: correct digit but wrong position
+    Cows: correct digit but wrong position (not counting bulls)
     """
     cows = 0
     bulls = 0
+    counted_secret_positions = []
     for i in range(4):
         if guess[i] == secret[i]:
             bulls += 1
-        elif guess[i] in secret:
-            cows += 1
+            counted_secret_positions.append(i)
+    for i in range(4):
+        if guess[i] != secret[i]:
+            for j in range(4):
+                if j not in counted_secret_positions and guess[i] == secret(j):
+                    cows += 1
+                    counted_secret_positions.append(j)
+                    break
     return bulls, cows
 
 def play_game():
@@ -65,17 +72,15 @@ def play_game():
     print("Let's play a bulls and cows game.")
     print("-" * 40)
     
-    secret = generate_secret_num
+    secret = generate_secret_num()
     print(secret)   ### remove afterwards
 
     tries = 0
 
     while True:
-        guess = input("Enter a number: ").strip()
-        """To remove any spaces from the 
-        Player's input
-        """
-        if not if_valid_guess(guess):
+        guess = input("Enter a number: ").strip() ##To remove any spaces from the Player's input
+        
+        if not is_valid_guess(guess):
             print("-" * 40)
             continue
         
@@ -92,33 +97,7 @@ def play_game():
         print(f"Number of guesses: {tries}")
         print("-" * 40)
 
-play_game()
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    cows = 0
-    bulls = 0
-    for i in range(4):
-        if choice_str[i] == rand_num_str[i]:
-            bulls += 1
-        elif choice_str[i] in rand_num_str:
-            cows += 1
-    print(f"{bulls} bulls, {cows} cows")
-    print(f"{tries}Guesses used.")## not working
-    print("-" * 40)
-
-    
+play_game()  
 
         
 
