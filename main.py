@@ -16,7 +16,7 @@ def generate_secret_num() -> str:
             number = ''.join(num)
             return number
         
-def if_valid_guess():
+def if_valid_guess(guess):
     """Check if the input guess is valid:
     -must be 4 digits long
     -must contain only numbers
@@ -38,6 +38,32 @@ def if_valid_guess():
             print("All the numbers must be unique. No repetition.")
             return False
         digit_collection.append(digit)
+    return True
+
+def count_bulls_and_cows(secret, guess):
+    """Counting Bulls and Cows.
+    Bulls: correct digit and correct position
+    Cows: correct digit but wrong position
+    """
+    cows = 0
+    bulls = 0
+    for i in range(4):
+        if guess[i] == secret[i]:
+            bulls += 1
+        elif guess[i] in secret:
+            cows += 1
+    return bulls, cows
+
+def play_game():
+    """Main game loop.
+    The Player keeps playing untill the secret number
+     is guessed.
+    """
+    print(f"{bulls} bulls, {cows} cows")
+    print(f"{tries}Guesses used.")## not working
+    print("-" * 40)
+
+
 
 
 
