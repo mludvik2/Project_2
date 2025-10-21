@@ -23,7 +23,6 @@ while True:
     choice = input("Enter a number: ")
     print("-" * 40)
     
-
     try:
         choice = int(choice)
     except ValueError:
@@ -41,25 +40,28 @@ while True:
         print("You have not chosen a 4 digit number.")
         print("-" * 40)
     else:
-        print("You have not guessed the number!")
+        cows = 0
+        bulls = 0
+        for number in range(4):
+            if choice == rand_num:
+                bull += 1
+            elif choice in rand_num:
+                cow += 1
+        print(f"{bulls} bulls, {cows} cows")
         print("-" * 40)
     print(tries)
 
+    
 
+        
 
-#elif choice == rand_num:
-    #print(f"Correct, you've guessed the right number in {sum(incorrect_num)} guesses!")
-#else:
-    #print("Try again.")
-    #incorrect_num += choice
-    #print(incorrect_num)
-
-#else:
-
-    #print("Try again.")
-    #loop through
+#Bulls = correct code, correct position. Cows = correct code, wrong position.
 
 #def generate_number(length, ):
+#Bulls = correct digit and correct position
 
+#Cows = correct digit but wrong position
+
+#Game ends when you guess the number exactly → all Bulls
 
 
