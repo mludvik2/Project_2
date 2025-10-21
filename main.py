@@ -6,6 +6,43 @@ email: mludvik2@yahoo.com
 """
 import random
 
+def generate_secret_num() -> str:
+    """Generate a random 4-digit number with unique
+      numbers and no zero at the beginning
+      """
+    while True:
+        num = random.sample('013456789',4)
+        if num [0] != '0':
+            number = ''.join(num)
+            return number
+        
+def if_valid_guess():
+    """Check if the input guess is valid:
+    -must be 4 digits long
+    -must contain only numbers
+    -must not start with 0
+    -must not repeat digits
+    """
+    if not guess.isdigit():
+        print("Invalid input. Please add numbers only.")
+        return False
+    if len(guess) != 4:
+        print("You have not chosen a 4 digit number.")
+        return False
+    if guess[0] == '0':
+        print("You cannot start your guess with zero.")
+        return False
+    digit_collection = []
+    for digit in guess:
+        if digit in digit_collection:
+            print("All the numbers must be unique. No repetition.")
+            return False
+        digit_collection.append(digit)
+
+
+
+
+
 print("Hi there!")
 print("-" * 40)
 print("I've generated a random 4 digit number for you.")
@@ -52,8 +89,8 @@ while True:
         elif choice_str[i] in rand_num_str:
             cows += 1
     print(f"{bulls} bulls, {cows} cows")
+    print(f"{tries}Guesses used.")## not working
     print("-" * 40)
-
 
     
 
@@ -67,5 +104,7 @@ while True:
 #Cows = correct digit but wrong position
 
 #Game ends when you guess the number exactly → all Bulls
+
+#sentence with tries not working
 
 
