@@ -12,10 +12,8 @@ print("I've generated a random 4 digit number for you.")
 print("Let's play a bulls and cows game.")
 print("-" * 40)
 
-rand_num = random.randint(1000, 9999)
-print(rand_num)
-
-
+rand_num = random.sample(1000, 9999)
+print(rand_num) ## remove later
 print("-" * 40)
 
 tries = 0
@@ -29,27 +27,33 @@ while True:
         print("Invalid input. Please add numbers only.")
         print("-" * 40)
         continue
+    
+    if choice < 1000 or choice > 9999:
+        print("You have not chosen a 4 digit number.")
+        print("-" * 40)
+        continue
     tries += 1
 
+    
     if choice == rand_num:
         print(f"Correct, you've guessed the right number in {tries} guesses!")
         print("-" * 40)
         print("That's amazing!")
         break
-    elif choice < 1000 or choice > 9999:
-        print("You have not chosen a 4 digit number.")
-        print("-" * 40)
-    else:
-        cows = 0
-        bulls = 0
-        for number in range(4):
-            if choice == rand_num:
-                bull += 1
-            elif choice in rand_num:
-                cow += 1
-        print(f"{bulls} bulls, {cows} cows")
-        print("-" * 40)
-    print(tries)
+
+    choice_str = str(choice)
+    rand_num_str = str(rand_num)
+        
+    cows = 0
+    bulls = 0
+    for i in range(4):
+        if choice_str[i] == rand_num_str[i]:
+            bulls += 1
+        elif choice_str[i] in rand_num_str:
+            cows += 1
+    print(f"{bulls} bulls, {cows} cows")
+    print("-" * 40)
+
 
     
 
