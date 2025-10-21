@@ -86,12 +86,13 @@ def play_game():
             print("-" * 40)
             print("That's amazing!")
             break
-
-        choice_str = str(choice)
-        rand_num_str = str(rand_num)
+        
+        bulls, cows = count_bulls_and_cows(secret, guess)
         print(f"{bulls} bulls, {cows} cows")
-        print(f"{tries}Guesses used.")## not working
+        print(f"Number of guesses: {tries}")
         print("-" * 40)
+
+play_game()
 
 
 
