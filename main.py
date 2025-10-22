@@ -74,7 +74,6 @@ def play_game():
     print("-" * 60)
     
     secret = generate_secret_num()
-    print(secret)   ### remove afterwards
 
     tries = 0
 
@@ -121,8 +120,4 @@ def main():
             break
 
 main()
-
-
-
-#remove comment and print of secret number
 
