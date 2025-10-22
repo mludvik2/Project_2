@@ -8,7 +8,7 @@ import random
 
 def generate_secret_num() -> str:
     """Generate a random 4-digit number with unique
-      numbers and no zero at the beginning
+      digits and no zero at the beginning
       """
     while True:
         digits = random.sample('0123456789', 4)
@@ -39,7 +39,7 @@ def is_valid_guess(guess: str) -> bool:
         digit_collection.append(digit)
     return True
 
-def count_bulls_and_cows(secret: str, guess: str) ->tuple[int,int]:
+def count_bulls_and_cows(secret: str, guess: str) -> tuple [int, int]:
     """Counting Bulls and Cows.
     Bulls: correct position
     Cows: correct digit but wrong position
