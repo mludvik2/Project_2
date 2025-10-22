@@ -55,7 +55,7 @@ def count_bulls_and_cows(secret, guess):
     for i in range(4):
         if guess[i] != secret[i]:
             for j in range(4):
-                if j not in counted_secret_positions and guess[i] == secret(j):
+                if j not in counted_secret_positions and guess[i] == secret[j]:
                     cows += 1
                     counted_secret_positions.append(j)
                     break
@@ -79,7 +79,8 @@ def play_game():
 
     while True:
         guess = input("Enter a number: ").strip() ##To remove any spaces from the Player's input
-        
+        print("-" * 40)
+
         if not is_valid_guess(guess):
             print("-" * 40)
             continue
@@ -87,29 +88,17 @@ def play_game():
         tries += 1
 
         if guess == secret:
-            print(f"Correct, you've guessed the right number in {tries} guesses!")
+            if tries == 1:
+                print(f"Correct, you've guessed the right number in {tries} guess!")
+            else:
+                print(f"Correct, you've guessed the right number in {tries} guesses!")
             print("-" * 40)
             print("That's amazing!")
             break
         
         bulls, cows = count_bulls_and_cows(secret, guess)
-        print(f"{bulls} bulls, {cows} cows")
+        print(f"{bulls} bull{'s' if bulls != 1 else ''}, {cows} cow{'s' if cows != 1 else ''}")
         print(f"Number of guesses: {tries}")
         print("-" * 40)
 
-play_game()  
-
-        
-
-#Bulls = correct code, correct position. Cows = correct code, wrong position.
-
-#def generate_number(length, ):
-#Bulls = correct digit and correct position
-
-#Cows = correct digit but wrong position
-
-#Game ends when you guess the number exactly → all Bulls
-
-#sentence with tries not working
-
-
+play_game()
