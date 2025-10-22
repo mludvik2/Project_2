@@ -6,17 +6,16 @@ email: mludvik2@yahoo.com
 """
 import random
 
-def generate_secret_num():
+def generate_secret_num() -> str:
     """Generate a random 4-digit number with unique
       numbers and no zero at the beginning
       """
     while True:
-        num = random.sample('0123456789',4)
-        if num[0] != '0':
-            number = ''.join(num)
-            return number
+        digits = random.sample('0123456789', 4)
+        if digits[0] != '0':
+            return ''.join(digits)
         
-def is_valid_guess(guess):
+def is_valid_guess(guess: str) -> bool:
     """Check if the input guess is valid:
     -must be 4 digits long
     -must contain only numbers
@@ -40,25 +39,27 @@ def is_valid_guess(guess):
         digit_collection.append(digit)
     return True
 
-def count_bulls_and_cows(secret, guess):
+def count_bulls_and_cows(secret: str, guess: str) ->tuple[int,int]:
     """Counting Bulls and Cows.
-    Bulls: correct digit and correct position
-    Cows: correct digit but wrong position (not counting bulls)
+    Bulls: correct position
+    Cows: correct digit but wrong position
     """
     cows = 0
     bulls = 0
-    counted_secret_positions = []
-    for i in range(4):
-        if guess[i] == secret[i]:
+    
+    unmatched_secret = []
+    unmatched_guess = []
+
+    for s, g in zip(secret, guess):
+        if s == g:
             bulls += 1
-            counted_secret_positions.append(i)
-    for i in range(4):
-        if guess[i] != secret[i]:
-            for j in range(4):
-                if j not in counted_secret_positions and guess[i] == secret[j]:
-                    cows += 1
-                    counted_secret_positions.append(j)
-                    break
+        else:
+            unmatched_secret.append(s)
+            unmatched_guess.append(g)
+    for g in unmatched_guess:
+        if g in unmatched_secret:
+            cows += 1
+            unmatched_secret.remove(g)
     return bulls, cows
 
 def play_game():
@@ -78,7 +79,7 @@ def play_game():
     tries = 0
 
     while True:
-        guess = input("Enter a number: ").strip() ##To remove any spaces from the Player's input
+        guess = input("Enter a number: ").strip()
         print("-" * 60)
 
         if not is_valid_guess(guess):
@@ -104,5 +105,4 @@ def play_game():
 play_game()
 
 #remove comment and print of secret number
-# * 50 
-# check first time answer and one bull or one cow
+
