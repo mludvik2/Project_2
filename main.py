@@ -67,10 +67,10 @@ def play_game():
      is guessed.
     """
     print("Hi there!")
-    print("-" * 50)
+    print("-" * 60)
     print("I've generated a random 4 digit number for you.")
     print("Let's play a bulls and cows game.")
-    print("-" * 50)
+    print("-" * 60)
     
     secret = generate_secret_num()
     print(secret)   ### remove afterwards
@@ -79,10 +79,10 @@ def play_game():
 
     while True:
         guess = input("Enter a number: ").strip() ##To remove any spaces from the Player's input
-        print("-" * 50)
+        print("-" * 60)
 
         if not is_valid_guess(guess):
-            print("-" * 50)
+            print("-" * 60)
             continue
         
         tries += 1
@@ -92,16 +92,17 @@ def play_game():
                 print(f"Correct, you've guessed the right number in {tries} guess!")
             else:
                 print(f"Correct, you've guessed the right number in {tries} guesses!")
-            print("-" * 50)
+            print("-" * 60)
             print("That's amazing!")
             break
         
         bulls, cows = count_bulls_and_cows(secret, guess)
         print(f"{bulls} bull{'s' if bulls != 1 else ''}, {cows} cow{'s' if cows != 1 else ''}")
         print(f"Number of guesses: {tries}")
-        print("-" * 50)
+        print("-" * 60)
 
 play_game()
 
 #remove comment and print of secret number
 # * 50 
+# check first time answer and one bull or one cow
