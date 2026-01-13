@@ -16,7 +16,6 @@ def generate_secret_num() -> str:
     while True:
         digits = random.sample('0123456789', num_digits)
         if digits[0] != '0':
-            print(digits)
             return ''.join(digits)
         
 def is_valid_guess(guess: str) -> bool:
