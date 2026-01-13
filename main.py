@@ -6,13 +6,17 @@ email: mludvik2@yahoo.com
 """
 import random
 
+num_digits = 4
+separator = "-" * 60
+
 def generate_secret_num() -> str:
     """Generate a random 4-digit number with unique
       digits and no zero at the beginning
       """
     while True:
-        digits = random.sample('0123456789', 4)
+        digits = random.sample('0123456789', num_digits)
         if digits[0] != '0':
+            print(digits)
             return ''.join(digits)
         
 def is_valid_guess(guess: str) -> bool:
@@ -22,21 +26,16 @@ def is_valid_guess(guess: str) -> bool:
     -must not start with 0
     -must not repeat digits
     """
-    if not guess.isdigit():
-        print("Invalid input. Please add numbers only.")
-        return False
-    if len(guess) != 4:
-        print("You have not chosen a 4 digit number.")
-        return False
-    if guess[0] == '0':
-        print("You cannot start your guess with zero.")
-        return False
-    digit_collection = []
-    for digit in guess:
-        if digit in digit_collection:
+    if not guess.isdigit() or len(guess) != num_digits or guess[0] == '0' or len(set(guess)) != len(guess):
+        if not guess.isdigit():
+            print("Invalid input. Please add numbers only.")
+        elif len(guess) != num_digits:
+            print(f"You have not chosen a {num_digits} digit number.")
+        elif guess[0] == '0':
+            print("You cannot start your guess with zero.")
+        else:
             print("All the numbers must be unique. No repetition.")
-            return False
-        digit_collection.append(digit)
+        return False
     return True
 
 def count_bulls_and_cows(secret: str, guess: str) -> tuple [int, int]:
@@ -56,10 +55,16 @@ def count_bulls_and_cows(secret: str, guess: str) -> tuple [int, int]:
         else:
             unmatched_secret.append(s)
             unmatched_guess.append(g)
+
+    used_secret = [False] * len(unmatched_secret)
+
     for g in unmatched_guess:
-        if g in unmatched_secret:
-            cows += 1
-            unmatched_secret.remove(g)
+        for i, s in enumerate(unmatched_secret):
+            if not used_secret[i] and g == s:
+                cows += 1
+                used_secret[i] = True
+                break
+
     return bulls, cows
 
 def play_game():
@@ -68,10 +73,10 @@ def play_game():
      is guessed.
     """
     print("Hi there!")
-    print("-" * 60)
-    print("I've generated a random 4 digit number for you.")
+    print(separator)
+    print(f"I've generated a random {num_digits} digit number for you.")
     print("Let's play a bulls and cows game.")
-    print("-" * 60)
+    print(separator)
     
     secret = generate_secret_num()
 
@@ -79,10 +84,9 @@ def play_game():
 
     while True:
         guess = input("Enter a number: ").strip()
-        print("-" * 60)
+        print(separator)
 
         if not is_valid_guess(guess):
-            print("-" * 60)
             continue
         
         tries += 1
@@ -92,15 +96,14 @@ def play_game():
                 print(f"Correct, you've guessed the right number in {tries} guess!")
             else:
                 print(f"Correct, you've guessed the right number in {tries} guesses!")
-            print("-" * 60)
+            print(separator)
             print("That's amazing!")
-            print("-" * 60)
             return tries
         
         bulls, cows = count_bulls_and_cows(secret, guess)
         print(f"{bulls} bull{'s' if bulls != 1 else ''}, {cows} cow{'s' if cows != 1 else ''}")
         print(f"Number of guesses: {tries}")
-        print("-" * 60)
+        print(separator)
 
 def main():
     """Let the Player replay and see their stats."""
@@ -112,12 +115,11 @@ def main():
 
         play_again = input("Would you like to play again? (yes/no): ").strip().lower()
         if play_again not in ("yes", "y"):
-            print("-" * 60)
+            print(separator)
             print("Thank you for playing! Here are your results: ")
             print(f"Games played: {len(all_tries)}")
             print("Goodbye!")
-            print("-" * 60)
             break
 
-main()
-
+if __name__ == "__main__":
+    main()
