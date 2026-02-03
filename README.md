@@ -22,13 +22,13 @@ python main.py
 ```  
 2. The program will greet you and generate a secret 4-digit number.  
 3. Enter a valid 4-digit guess. Rules for guesses:  
- - Must be **exactly 4 digits long.**
- - Must contain **only numbers.**
- - Cannot start with **0.**
- - All digits must be **unique.**
+    - Must be **exactly 4 digits long.**
+    - Must contain **only numbers.**
+    - Cannot start with **0.**
+    - All digits must be **unique.**
 4. After each guess, the program will display:  
- - Number of **bulls** (correct digits in the correct place)
- - Number of **cows** (correct digits in the wrong place)
- - Total number of guesses so far
+    - Number of **bulls** (correct digits in the correct place)
+    - Number of **cows** (correct digits in the wrong place)
+    - Total number of guesses so far
 5. Repeat guessing until you find the correct number.  
 6. After each game, you can choose to play again or exit. The program will summarize your stats at the end.  
