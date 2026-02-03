@@ -17,9 +17,9 @@ The game continues until you guess the secret number correctly. The program also
 
 **How to Play**
 1. Run the game:
-
+```
 python main.py
-
+```
 2. The program will greet you and generate a secret 4-digit number.
 3. Enter a valid 4-digit guess. Rules for guesses:
 - Must be **exactly 4 digits long.**
